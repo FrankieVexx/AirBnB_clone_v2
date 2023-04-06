@@ -10,8 +10,8 @@ from datetime import datetime
 def do_pack():
     """ A function to create an archive """
 	
-	current_time = datetime.now()
-	time_string = current_time.strftime("%Y%m%d%H%M%S")
+	time_now = datetime.now()
+	time_string = time_now.strftime("%Y%m%d%H%M%S")
 
 	try:
             local("mkdir -p versions")
