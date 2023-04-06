@@ -1,23 +1,24 @@
 #!/usr/bin/python3
-""" Create an archive of the webstatic directory from AIrBnB_clone_v2
-"""
-
+"""a fabric script to create an archive file"""
 
 from fabric.api import local
 from datetime import datetime
 
-
 def do_pack():
-    """ A function to create an archive """
-	
-	time_now = datetime.now()
-	time_string = time_now.strftime("%Y%m%d%H%M%S")
+    """ A function that compresses a file """
+    
+    current_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    file_path = "versions/web_static_{}.tgz".format(current_time)
 
-	try:
-            local("mkdir -p versions")
-            local("tar -cvzf versions/web_static_{}.tgz web_static".format(time_string))
-            return ("versions/web_static_{}".format(time_string))
+	""" Create a directory named versions
+	create an arhcive of webstatic
+	return the path of the archive file
+	"""   
+    try:
+        local("mkdir -p versions")
+        local("tar -cvzf {} web_static/".format(file_path))        
+        return "{}".format(file_path)
 
-	except Exception as error:
-            return None
-
+    except Exception as error:
+        return None
+        
