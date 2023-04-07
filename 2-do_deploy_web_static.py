@@ -30,28 +30,28 @@ def do_deploy(archive_path):
 
         """ Create directory for the deployed files"""
         run("sudo mkdir -p /data/web_static/releases/{}/"
-            .format(archive_name_no_ext))
+            .format(arch_name_minus))
 
         """ Decompress the archive into the we_static folder """
         run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
-            .format(archive_name, archive_name_no_ext))
+            .format(arch_name, arch_name_minus))
 
         """ Delete the archive from the server """
-        run("sudo rm /tmp/{}".format(archive_name))
+        run("sudo rm /tmp/{}".format(arch_name))
 
         """ Move the files to a new folder and delete the old symbolic link """
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/"
-            .format(archive_name_no_ext, archive_name_no_ext))
+            .format(arch_name_minus, arch_name_minus))
         run("sudo rm -rf /data/web_static/releases/{}/web_static"
-            .format(archive_name_no_ext))
+            .format(arch_name_minus))
 
         """ Delete the old symbolic link and create a new one """
         run("sudo rm -rf /data/web_static/current")
         run("sudo ln -s /data/web_static/releases/{}/ \
-                /data/web_static/current".format(archive_name_no_ext))
+                /data/web_static/current".format(arch_name_minus))
 
         return True
 
-    except Exception as error:
+    except Exception as e:
         return False
