@@ -11,10 +11,10 @@ def home():
 def index():
     """ a function that returns hbnb """
     return "HBNB"
-@app.route("/c/is_fun", strict_slashes=False)
-def c_is_fun():
+@app.route("/c/<text>", strict_slashes=False)
+def c_is_fun(text):
     """ display "c is fun """
-    return "C is fun"
+    return f'C {text.replace("_", " ")}'
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
