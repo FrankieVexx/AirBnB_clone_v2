@@ -20,21 +20,21 @@ def index():
 @app.route("/c/<text>", strict_slashes=False)
 def c_is_fun(text):
     """ display "c is fun """
-    return f'C {text.replace("_", " ")}'
+    return 'C ' + text.replace("_", " ")
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def py_test(text='is cool'):
     """display "Python " + the text variable if provided"""
-    return f'Python {text.replace("_", " ")}'
+    return 'Python ' + text.replace("_", " ")
 
 
 @app.route('/number/<n>', strict_slashes=False)
 def numb(n):
     """ Display an integer"""
     n = int(n)
-    return f'{n} is a number'
+    return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
