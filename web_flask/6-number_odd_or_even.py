@@ -33,7 +33,6 @@ def py_test(text='is cool'):
 @app.route('/number/<n>', strict_slashes=False)
 def numb(n):
     """ Display an integer"""
-    n = int(n)
     return "{} is a number".format(n)
 
 
@@ -47,10 +46,10 @@ def num_template(n):
 def hmtl_var(n):
     """Display html variables"""
     if n % 2 == 0:
-        number_odd_or_even = 'even'
+        nm_odd_or_even = 'even'
     else:
-        number_odd_or_even = 'odd'
-    return render_template("6-number_odd_or_even.html", n=n, m=number_odd_or_even)
+        nm_odd_or_even = 'odd'
+    return render_template("6-number_odd_or_even.html", n=n, m=nm_odd_or_even)
 
 
 if __name__ == "__main__":
