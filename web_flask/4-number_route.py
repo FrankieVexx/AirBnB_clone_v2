@@ -33,7 +33,7 @@ def py_test(text='is cool'):
 @app.route('/number/<int:n>', strict_slashes=False)
 def numb(n):
     """ Display an integer"""
-    return "n  is a number"
+    return '{n }'+ is a number"
 
 
 if __name__ == "__main__":
