@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Define a base class for all models in hbnb clone"""
+"""This module defines a base class for all models in our hbnb clone"""
 import uuid
 from os import getenv
 from datetime import datetime
@@ -26,7 +26,8 @@ class BaseModel:
         if kwargs:
             for k in kwargs:
                 if k in ['created_at', 'updated_at']:
-                    setattr(self, k, datetime.fromisoformat(kwargs[k]))
+                    my_str = "%Y-%m-%dT%H:%M:%S.%f"
+                    setattr(self, k, datetime.strptime(kwargs[k], my_str))
                 elif k != '__class__':
                     setattr(self, k, kwargs[k])
                 if not hasattr(kwargs, 'id'):
@@ -45,14 +46,14 @@ class BaseModel:
                                      dictionary)
 
     def save(self):
-        """Updates updated_at with current time"""
+        """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
-        """Convert instance to dict"""
+        """Convert instance into dict format"""
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
@@ -64,6 +65,6 @@ class BaseModel:
         return dictionary
 
     def delete(self):
-        """ delete the current instance from the dictionary """
+        """ deletes the current instance from the dictionary """
         from models import storage
         storage.delete(self)
